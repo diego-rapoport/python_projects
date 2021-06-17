@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 import os
-from random import choice
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.panel import Panel
