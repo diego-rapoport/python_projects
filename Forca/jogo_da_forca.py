@@ -177,7 +177,7 @@ class Controle:
     def inicia_jogo(self):
         self.console.print(self.painel,
                            justify='center',
-                           style='bold red on black')
+                           style='bold blue on black')
         self.jogador = Jogador(Prompt.ask('Diga seu nome'))
         self.forca = Forca(self.jogador.corpo)
         while self.forca.boneco.vivo and self.palavra_incompleta():
