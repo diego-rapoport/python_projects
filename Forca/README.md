@@ -5,9 +5,9 @@ Pequeno jogo da forca que fiz em um arquivo só. São poucas as palavras, por en
 
 ## Instruções básicas
 
-`git clone https://github.com/diego-rapoport/python_projects/tree/main/Forca`
+`git clone https://github.com/diego-rapoport/python_projects.git`
 
-`cd Forca`
+`cd python_projects/Forca`
 
 `pip install -r requirements.txt`
 
