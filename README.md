@@ -1,8 +1,8 @@
-# Jogo da Forca
-Pequeno jogo da forca que fiz em um arquivo só. São poucas as palavras, por enquanto, e pretendo adicionar mais funcionalidades posteriormente.
+# Meus projetos python!
 
-`git clone https://github.com/diego-rapoport/python_projects`
+---
 
-`pip install rich`
+## Jogos
+  1. [Forca](https://github.com/diego-rapoport/python_projects/tree/main/Forca)
 
-`python jogo_da_forca.py`
+---
