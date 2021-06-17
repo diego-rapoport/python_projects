@@ -14,8 +14,8 @@ Pequeno jogo da forca que fiz em um arquivo só. São poucas as palavras, por en
 `python jogo_da_forca.py`
 
 ## A fazer
-- [ ] Aumentar o número de palavras
-- [ ] Dar dica
+- [X] Aumentar o número de palavras
+- [X] Dar dica
 - [ ] Criar menu
 - [ ] Dar opção de palavras com no máximo x letras
-- [ ] Integração com Dicio.com.br
+- [X] Integração com Dicio.com.br
