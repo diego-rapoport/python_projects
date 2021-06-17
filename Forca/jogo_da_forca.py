@@ -4,6 +4,8 @@ from random import choice
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.panel import Panel
+from rich.layout import Layout
+from dicionario import Dicionario
 
 
 class Membro(ABC):
@@ -85,25 +87,19 @@ class Boneco:
             self.vivo = False
 
 
-class Palavra:
+class Palavra(Dicionario):
     def __init__(self):
-        self.palavras = [
-            'familia', 'açougue', 'psicopata', 'pandemia', 'ensolarado',
-            'endividamento', 'verdejante', 'celeuma', 'apicultor',
-            'rastejante', 'ventilador', 'submarino', 'helicoptero',
-            'planejamento', 'receptivo', 'visionario'
-        ]
-        self.adivinha = choice(self.palavras)
-        self.segredo = '_' * len(self.adivinha)
+        super().__init__()
+        self.segredo = '_' * len(self.palavra)
 
     def __str__(self):
         return self.segredo
 
     def adiciona_letra(self, letra):
-        indices = [i for i, l in enumerate(self.adivinha) if letra == l]
+        indices = [i for i, l in enumerate(self.palavra) if letra == l]
         self.segredo = ''.join([
             l if i in indices else l if l == self.segredo[i] else '_'
-            for i, l in enumerate(self.adivinha)
+            for i, l in enumerate(self.palavra)
         ])
 
 
@@ -137,6 +133,9 @@ class Controle:
         self.painel = Panel('JOGO DA FORCA')
         self.console = Console()
         self.letras_erradas = []
+        self.layout = Layout()
+
+        self.layout.split_row(Layout(name='esquerda'), Layout(name='direita'))
 
     def pega_resposta(self):
         self.resposta = Prompt.ask(
@@ -146,11 +145,11 @@ class Controle:
                 f'Você quer arriscar chutando a palavra {self.resposta}?(s/n)'
             ).lower()
             if arriscar == 's' and self.resposta.lower(
-            ) == self.forca.palavra.adivinha:
-                self.forca.palavra.segredo = self.forca.palavra.adivinha
+            ) == self.forca.palavra.palavra:
+                self.forca.palavra.segredo = self.forca.palavra.palavra
                 return
             elif arriscar.lower(
-            ) == 's' and self.resposta.lower() != self.forca.palavra.adivinha:
+            ) == 's' and self.resposta.lower() != self.forca.palavra.palavra:
                 self.console.print('Infelizmente você errou a palavra')
                 self.forca.boneco.vivo = False
                 return
@@ -164,15 +163,17 @@ class Controle:
                 )
                 return
 
-        if self.resposta in self.forca.palavra.adivinha:
+        if self.resposta in self.forca.palavra.palavra:
             self.forca.palavra.adiciona_letra(self.resposta)
-            return self.console.print('Parabéns! Você acertou a letra')
+            return
+            #return self.console.print('Parabéns! Você acertou a letra')
         self.forca.boneco.retira_parte()
         self.letras_erradas.append(self.resposta)
-        return self.console.print('Infelizmente você errou e perdeu uma vida')
+        return
+        #return self.console.print('Infelizmente você errou e perdeu uma vida')
 
     def palavra_incompleta(self):
-        return True if self.forca.palavra.segredo != self.forca.palavra.adivinha else False
+        return True if self.forca.palavra.segredo != self.forca.palavra.palavra else False
 
     def inicia_jogo(self):
         self.console.print(self.painel,
@@ -189,12 +190,18 @@ class Controle:
                 self.forca.renderiza_forca(self.jogador.nome),
                 Panel.fit('-'.join(self.letras_erradas),
                           title='Letras erradas'))
+            if len(self.forca.boneco.partes) < 2:
+                self.console.print(
+                    f'Dica final: {self.forca.palavra.significado}')
+            elif len(self.forca.boneco.partes) < 5:
+                self.console.print(
+                    f'Sinônimo de {self.forca.palavra.sinonimo}')
             self.pega_resposta()
         if self.forca.boneco.vivo:
             return self.console.print(
                 'Parabéns, você acertou a palavra e ganhou o jogo!')
         return self.console.print(
-            f'Você não conseguiu acertar a palavra a tempo e foi enforcado! A palavra era {self.forca.palavra.adivinha}'
+            f'Você não conseguiu acertar a palavra a tempo e foi enforcado! A palavra era {self.forca.palavra.palavra}'
         )
 
 
