@@ -181,7 +181,7 @@ class Controle:
         self.jogador = Jogador(Prompt.ask('Diga seu nome'))
         self.forca = Forca(self.jogador.corpo)
         while self.forca.boneco.vivo and self.palavra_incompleta():
-            if os.sys.platform == 'windows':
+            if os.sys.platform == 'win32':
                 os.system('cls')
             else:
                 os.system('clear')
