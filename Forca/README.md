@@ -1,5 +1,5 @@
 # Jogo da Forca
-Pequeno jogo da forca que fiz em um arquivo só. São poucas as palavras, por enquanto, e pretendo adicionar mais funcionalidades posteriormente.
+Criado com a biblioteca rich.
 
 ![imagem off](https://github.com/diego-rapoport/python_projects/blob/main/Forca/imagens/exemplo_forca2.jpg)
 
